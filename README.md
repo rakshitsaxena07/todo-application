@@ -1,99 +1,85 @@
-#  ToDo Application – Backend (REST API)
+# Todo Application – Spring Boot
 
-This is a **backend-only ToDo (Task Management) application** built using **Node.js and Express**, following **MVC architecture**, **Clean Code principles**, and **Object-Oriented Programming (OOP)** concepts.
+## Problem Statement
+Design and implement a robust RESTful API for a Task Management System. The application must be built using the Model-View-Controller (MVC) architectural pattern, where the "View" is represented by JSON responses, No Database. The primary goal is to demonstrate mastery of Object-Oriented Programming (OOP) and Clean Architecture.
 
-The application exposes a **RESTful API** that allows clients to create, read, update, filter, and delete tasks. No database is used — all data is stored **in-memory**, focusing purely on backend design and API flow.
+#### Each task should have:
+- A unique identifier (UUID).
+- A title (required, max 100 chars).
+- A description (required, max 500 chars).
+- A status (Pending, In Progress, Completed).
+- A priority level (Low, Medium, High).
+- Timestamps (Created At, Updated At).
 
----
-
-##  Features
-
-* RESTful API design
-* MVC (Model–View–Controller) architecture
-* Clean separation of concerns
-* In-memory data storage (no database)
-* Proper HTTP status codes
-* Validation using middleware
-
----
-
-##  Architecture Overview
-
-```
-Client
-  ↓
-Routes
-  ↓
-Middleware (Validation)
-  ↓
-Controllers (HTTP handling)
-  ↓
-Services (Business Logic)
-  ↓
-Models (Data Structure)
-```
-
-Each layer has **one responsibility**, making the application easy to understand, test, and extend.
+#### The Backend App must support:
+- Create Task: Validate input and prevent duplicate titles.
+- List All Tasks: Filterable by status or priority.
+- Get Single Task: Retrieve details by ID; handle "Not Found" scenarios gracefully.
+- Update Task: Partially update fields (e.g., just changing the status).
+- Delete Task: Remove a task and return an appropriate status code.
 
 ---
 
-##  Folder Structure
+## Tech Stack
 
+- Node.js
+- Express.js
+- JavaScript (CommonJS)
+- UUID for unique identifiers
+- In-memory data storage (No Database)
+
+---
+
+## Installation & Setup
+#### Prerequisites
+- Node.js (v18+ recommended)
+- npm
+
+#### Steps
+
+1. Clone the repository
 ```
-src/
- ├── controllers/
- │    └── task.controller.js
- ├── services/
- │    └── task.service.js
- ├── models/
- │    └── task.model.js
- ├── routes/
- │    └── task.routes.js
- ├── middlewares/
- │    └── validateTask.middleware.js
- ├── utils/
- │    └── uuid.js
- ├── app.js
- └── server.js
+git clone https://github.com/rakshitsaxena07/todo-application.git
 ```
 
----
+2. Navigate to the project directory
+```
+cd todo-application
+```
 
-##  Tech Stack
-
-* **Node.js**
-* **Express.js**
-* **Nodemon** (for development)
-* **Crypto (UUID generation)**
-
----
-
-##  Setup & Run
-
-###  Install dependencies
-
-```bash
+3. Install dependencies
+```
 npm install
 ```
 
-###  Run the server
-
-Development mode:
-
-```bash
-npm run dev
+4. Start the server
+```
+node index.js
 ```
 
-Production mode:
-
-```bash
-npm start
-```
-
-Server runs on:
-
+5. The server will start on:
 ```
 http://localhost:3000
 ```
 
 ---
+
+## Testing the API
+
+#### You can test the API using:
+
+- Postman
+- Thunder Client
+- curl
+
+All responses are returned in JSON format with appropriate HTTP status codes.
+
+---
+
+## Assumptions & Limitations
+
+No database is used (data resets on server restart)
+
+Authentication and authorization are out of scope
+
+Designed purely for architectural and OOP demonstration
