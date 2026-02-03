@@ -1,11 +1,9 @@
 const express = require('express');
+const taskRoutes = require('./routes/task');
 
 const app = express();
 app.use(express.json());
 
-// Sample route
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use('/v1/tasks', taskRoutes);
 
 module.exports = app;

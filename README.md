@@ -29,6 +29,53 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 - In-memory data storage (No Database)
 
 ---
+## Features
+
+### 1. Create Task
+- Accepts task details via request body
+- Validates task input(title, description and priority)
+- Prevents duplicate task titles
+- Sets default status to `PENDING`
+- Automatically generates UUID and timestamps
+
+---
+
+## 📂 Project Structure
+
+```txt
+src/
+ ├── constants/
+ │    └── taskConstants.js
+ │
+ ├── controllers/
+ │    ├── tasks
+ │    │     └── createTask.js
+ │
+ ├── data/
+ │    └── store.js
+ │
+ ├── routes/
+ │    └── task.js
+ │
+ ├── services/
+ │    ├── tasks
+ │    │     └── create.js
+ │
+ ├── repositories/
+ │    └── task.repository.js
+ │
+ ├── validators/
+ │    └── taskValidator.js
+ │
+ ├── app.js
+ │
+.gitignore
+index.js
+package-lock.json
+package.json
+README.md
+```
+---
 
 ## Installation & Setup
 #### Prerequisites
