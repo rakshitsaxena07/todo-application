@@ -1,4 +1,4 @@
-# 📝 ToDo Application – Backend (REST API)
+#  ToDo Application – Backend (REST API)
 
 This is a **backend-only ToDo (Task Management) application** built using **Node.js and Express**, following **MVC architecture**, **Clean Code principles**, and **Object-Oriented Programming (OOP)** concepts.
 
@@ -6,7 +6,7 @@ The application exposes a **RESTful API** that allows clients to create, read, u
 
 ---
 
-## 🚀 Features
+##  Features
 
 * RESTful API design
 * MVC (Model–View–Controller) architecture
@@ -17,7 +17,7 @@ The application exposes a **RESTful API** that allows clients to create, read, u
 
 ---
 
-## 🧠 Architecture Overview
+##  Architecture Overview
 
 ```
 Client
@@ -37,7 +37,7 @@ Each layer has **one responsibility**, making the application easy to understand
 
 ---
 
-## 📁 Folder Structure
+##  Folder Structure
 
 ```
 src/
@@ -59,7 +59,7 @@ src/
 
 ---
 
-## 📦 Tech Stack
+##  Tech Stack
 
 * **Node.js**
 * **Express.js**
@@ -68,15 +68,15 @@ src/
 
 ---
 
-## ⚙️ Setup & Run
+##  Setup & Run
 
-### 1️⃣ Install dependencies
+###  Install dependencies
 
 ```bash
 npm install
 ```
 
-### 2️⃣ Run the server
+###  Run the server
 
 Development mode:
 
