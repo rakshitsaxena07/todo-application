@@ -1,0 +1,24 @@
+{
+  "name": "todo-application",
+  "version": "1.0.0",
+  "description": "This is a **backend-only ToDo (Task Management) application** built using **Node.js and Express**, following **MVC architecture**, **Clean Code principles**, and **Object-Oriented Programming (OOP)** concepts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rakshitsaxena07/todo-application.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rakshitsaxena07/todo-application/issues"
+  },
+  "homepage": "https://github.com/rakshitsaxena07/todo-application#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
