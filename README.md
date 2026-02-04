@@ -1,4 +1,4 @@
-# Todo Application – Spring Boot
+# Todo Application
 
 ## Problem Statement
 Design and implement a robust RESTful API for a Task Management System. The application must be built using the Model-View-Controller (MVC) architectural pattern, where the "View" is represented by JSON responses, No Database. The primary goal is to demonstrate mastery of Object-Oriented Programming (OOP) and Clean Architecture.
@@ -49,34 +49,44 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 ## 📂 Project Structure
 
 ```txt
-src/
- ├── constants/
- │    └── taskConstants.js
- │
- ├── controllers/
- │    ├── tasks
- │    │     └── createTask.js
- │
- ├── data/
- │    └── store.js
- │
- ├── routes/
- │    └── task.js
- │
- ├── services/
- │    ├── tasks
- │    │     └── create.js
- │
- ├── validators/
- │    └── taskValidator.js
- │
- ├── app.js
- │
-.gitignore
-index.js
-package-lock.json
-package.json
-README.md
+todo-application/
+│
+├── node_modules/
+│
+├── src/
+│   │
+│   ├── constants/
+│   │   └── taskConstants.js
+│   │
+│   ├── controllers/
+│   │   └── tasks/
+│   │       ├── createTask.js
+│   │       ├── fetchTasks.js
+│   │       └── updateTask.js
+│   │
+│   ├── data/
+│   │   └── store.js
+│   │
+│   ├── routes/
+│   │   └── task.js
+│   │
+│   ├── services/
+│   │   └── tasks/
+│   │       ├── create.js
+│   │       ├── fetch.js
+│   │       └── update.js
+│   │
+│   ├── validators/
+│   │   ├── taskValidator.js
+│   │  
+│   │
+│   └── app.js
+│
+├── .gitignore
+├── index.js
+├── package.json
+├── package-lock.json
+└── README.md
 ```
 ---
 
