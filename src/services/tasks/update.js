@@ -1,5 +1,5 @@
 const store = require('../../data/store');
-const validateUpdateTask = require('../../validators/taskValidator');
+const { validateUpdateTask } = require('../../validators/taskValidator');
 
 const update = (id, data) => {
     validateUpdateTask(data);
@@ -11,9 +11,17 @@ const update = (id, data) => {
         error.code = "TASK_NOT_FOUND";
         throw error;
     }
+    const allowedFields = ['title', 'description', 'status', 'priority'];
+    const updates = {};
 
-    
-    Object.assign(task, data, { updatedAt: new Date() });
+    allowedFields.forEach(field => {
+        if (data[field] !== undefined) {
+            updates[field] = data[field];
+        }
+    });
+
+
+    Object.assign(task, updates, { updatedAt: new Date() });
 
     return task;
 };
