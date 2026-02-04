@@ -1,7 +1,7 @@
 const { STATUS } = require('../../constants/taskConstants');
 const store = require('../../data/store');
 const crypto = require('crypto');
-const validateCreateTask = require('../../validators/taskValidator');
+const {validateCreateTask} = require('../../validators/taskValidator');
 
 const create = (data) => {
     validateCreateTask(data);
