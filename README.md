@@ -35,7 +35,6 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 - Accepts task details via request body
 - Validates task input(title, description and priority)
 - Prevents duplicate task titles
-- Sets default status to `PENDING`
 - Automatically generates UUID and timestamps
 
 ### 2. List All Tasks
@@ -63,11 +62,10 @@ todo-application/
 │   ├── constants/
 │   │   └── taskConstants.js
 │   │
-│   ├── controllers/
-│   │   └── tasks/
-│   │       ├── createTask.js
-│   │       ├── fetchTasks.js
-│   │       └── updateTask.js
+│   ├── controllers/tasks/
+│   │   ├── createTask.js
+│   │   ├── fetchTasks.js
+│   │   └── updateTask.js
 │   │
 │   ├── data/
 │   │   └── store.js
@@ -75,22 +73,20 @@ todo-application/
 │   ├── routes/
 │   │   └── task.js
 │   │
-│   ├── services/
-│   │   └── tasks/
-│   │       ├── create.js
-│   │       ├── fetch.js
-│   │       └── update.js
+│   ├── services/tasks/
+│   │   ├── create.js
+│   │   ├── fetch.js
+│   │   └── update.js
 │   │
 │   ├── validators/
-│   │   ├── taskValidator.js
-│   │  
+│   │   └── taskValidator.js
 │   │
 │   └── app.js
 │
 ├── .gitignore
 ├── index.js
-├── package.json
 ├── package-lock.json
+├── package.json
 └── README.md
 ```
 ---
