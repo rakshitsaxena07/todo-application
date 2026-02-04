@@ -5,7 +5,7 @@ const {validateCreateTask} = require('../../validators/taskValidator');
 
 const create = (data) => {
     validateCreateTask(data);
-    const { title, description, priority } = data;
+    const { title, description, priority,status } = data;
 
     const isTaskExists = store.tasks.find((task) => task.title.toLowerCase() === title.toLowerCase());
     if (isTaskExists) {
@@ -20,7 +20,7 @@ const create = (data) => {
         id: crypto.randomUUID(),
         title: title,
         description: description,
-        status: STATUS.PENDING,
+        status: status,
         priority: priority,
         createdAt: now,
         updatedAt: now,
