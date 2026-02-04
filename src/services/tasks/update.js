@@ -11,6 +11,24 @@ const update = (id, data) => {
         error.code = "TASK_NOT_FOUND";
         throw error;
     }
+
+    //To check duplicate title while updating
+
+     if (data.title !== undefined) {
+    const normalizedTitle = data.title.toLowerCase();
+
+    const isDuplicate = store.tasks.some(
+        (t) => t.id !== id && t.title.toLowerCase() === normalizedTitle
+    );
+
+    if (isDuplicate) {
+        const error = new Error("Task with this title already exists");
+        error.status = 409;
+        error.code = "DUPLICATE_TASK";
+        throw error;
+    }
+}
+
     const allowedFields = ['title', 'description', 'status', 'priority'];
     const updates = {};
 
