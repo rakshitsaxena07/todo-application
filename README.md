@@ -38,6 +38,12 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 - Sets default status to `PENDING`
 - Automatically generates UUID and timestamps
 
+### 2. List All Tasks
+- Returns all tasks
+- Supports filtering by:
+  - Status
+  - Priority
+
 ---
 
 ## 📂 Project Structure
@@ -60,9 +66,6 @@ src/
  ├── services/
  │    ├── tasks
  │    │     └── create.js
- │
- ├── repositories/
- │    └── task.repository.js
  │
  ├── validators/
  │    └── taskValidator.js
