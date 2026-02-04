@@ -1,7 +1,7 @@
 const { PRIORITY } = require("../constants/taskConstants");
 
 const validateCreateTask = (data) => {
-     const { title, description, priority } = data;  //changed besause .trim() will give error when no title
+     const { title, description,status, priority } = data;  //changed besause .trim() will give error when no title
 
     if (!title || typeof title !== 'string' || title.length > 100) {
         const error = new Error("Invalid or missing 'title'");
@@ -14,6 +14,12 @@ const validateCreateTask = (data) => {
         const error = new Error("Invalid or missing 'description'");
         error.status = 400;
         error.code = "INVALID_DESCRIPTION";
+        throw error;
+    }
+     if (!status || !Object.values(STATUS).includes(status)) {
+        const error = new Error("Invalid or missing 'status'");
+        error.status = 400;
+        error.code = "INVALID_STATUS";
         throw error;
     }
 
