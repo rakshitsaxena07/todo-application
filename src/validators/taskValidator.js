@@ -1,9 +1,7 @@
 const { PRIORITY } = require("../constants/taskConstants");
 
 const validateCreateTask = (data) => {
-    const title = data.title.trim();
-    const description = data.description.trim();
-    const priority = data.priority;
+     const { title, description, priority } = data;  //changed besause .trim() will give error when no title
 
     if (!title || typeof title !== 'string' || title.length > 100) {
         const error = new Error("Invalid or missing 'title'");
