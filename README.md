@@ -44,6 +44,11 @@ Design and implement a robust RESTful API for a Task Management System. The appl
   - Status
   - Priority
 
+### 3. Update Task
+- update or alter existing task - title, description
+- update Status
+- update Priority
+
 ---
 
 ## 📂 Project Structure
