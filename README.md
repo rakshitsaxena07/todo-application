@@ -40,8 +40,8 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 ### 2. List All Tasks
 - Returns all tasks
 - Supports filtering by:
-  - Status
-  - Priority
+  - Status->[Pending, In Progress, Completed]
+  - Priority->[High, Medium, Low]
 
 ### 3. Update Task
 - update or alter existing task - title, description
