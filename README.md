@@ -45,8 +45,8 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 
 ### 3. Update Task
 - update or alter existing task - title, description
-- update Status
-- update Priority
+- update Status->[Pending, In Progress, Completed]
+- update Priority->[High, Medium, Low]
 
 ---
 
