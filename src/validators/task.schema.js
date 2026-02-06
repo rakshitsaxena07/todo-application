@@ -1,4 +1,4 @@
-const {zod} = require('zod');
+const {z} = require('zod');
 const statusEnum = ['pending', 'in progress', 'completed'];
 const priorityEnum = ['low', 'medium', 'high'];
 
