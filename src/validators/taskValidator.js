@@ -13,7 +13,6 @@ function validateCreateTask(req,res,next){
     req.body = result.data;
     next();
 }
-module.exports={validateCreateTask}
 
 function validateUpdateTask(req, res, next) {
   const fieldsNotRequired = ['id', 'createdAt', 'updatedAt'];
@@ -39,3 +38,4 @@ function validateUpdateTask(req, res, next) {
     req.body = result.data;
     next();
 }
+module.exports={validateCreateTask,validateUpdateTask}
