@@ -2,7 +2,7 @@ const { STATUS } = require('../../constants/taskConstants');
 const store = require('../data/store');
 const crypto = require('crypto');
 
-const create = (data) => {
+const createTask = (data) => {
     const { title, description, priority,status } = data;
     const isTaskExists = store.tasks.find((task) => task.title.toLowerCase() === title.toLowerCase());
     if (isTaskExists) {
@@ -23,17 +23,18 @@ const create = (data) => {
     store.tasks.push(task);
     return task;
 }
-const get = (query) => {
+const getAllTask = (query) => {
     const allTasks = [...store.tasks]
 
     if (query.status) {
-        return allTasks.filter(task => task.status.toLowerCase() === query.status.toLowerCase());
+        allTasks = allTasks.filter(task => task.status.toLowerCase() === query.status.toLowerCase());
     }
-
     if (query.priority) {
-        return allTasks.filter(task => task.priority.toLowerCase() === query.priority.toLowerCase());
+        allTasks = allTasks.filter(task => task.priority.toLowerCase() === query.priority.toLowerCase());
     }
-
+    if(allTasks.length===0){
+      return []
+    }
     return allTasks;
 }
 const update = (id, data) => {
