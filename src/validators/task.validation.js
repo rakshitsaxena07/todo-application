@@ -13,4 +13,3 @@ function validateCreateTask(req,res,next){
     req.body = result.data;
     next();
 }
-module.exports={validateCreateTask}
