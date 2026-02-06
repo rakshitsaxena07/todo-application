@@ -1,5 +1,5 @@
 const express = require('express');
-const taskRoutes = require('./routes/task');
+const taskRoutes = require('./routes/task.route');
 
 const app = express();
 app.use(express.json());
