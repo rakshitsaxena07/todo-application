@@ -1,16 +1,12 @@
 const { STATUS } = require('../../constants/taskConstants');
-const store = require('../../data/store');
+const store = require('../data/store');
 const crypto = require('crypto');
 
 const create = (data) => {
     const { title, description, priority,status } = data;
-
     const isTaskExists = store.tasks.find((task) => task.title.toLowerCase() === title.toLowerCase());
     if (isTaskExists) {
-        const error = new Error("Task with this title already exists");
-        error.status = 409;
-        error.code = "DUPLICATE_TASK";
-        throw error;
+        throw new Error("Task with this title already exists");
     }
 
     const now = new Date();
