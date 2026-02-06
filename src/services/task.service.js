@@ -17,10 +17,7 @@ const createTask = (data) => {
 
   const task = new Task({
     id: crypto.randomUUID(),
-    title,
-    description,
-    status,
-    priority,
+    ...data
   });
 
   store.tasks.push(task);
@@ -56,7 +53,6 @@ const updateTask = (id, data) => {
 
   const task = store.tasks[taskIndex];
 
-  // Check duplicate title
   if (data.title !== undefined) {
     const normalizedTitle = data.title.toLowerCase();
     const isDuplicate = store.tasks.some(
@@ -69,7 +65,6 @@ const updateTask = (id, data) => {
     }
   }
 
-  // Update allowed fields
   const allowedFields = ['title', 'description', 'status', 'priority'];
   allowedFields.forEach((field) => {
     if (data[field] !== undefined) {
