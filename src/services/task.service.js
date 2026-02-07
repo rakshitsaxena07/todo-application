@@ -43,38 +43,38 @@ const getAllTask = (query) => {
 };
 
 const updateTask = (id, data) => {
-  const taskIndex = store.tasks.findIndex((task) => task.id === id);
-
+  const taskIndex = store.tasks.findIndex(task => task.id === id);
   if (taskIndex === -1) {
-    const err = new Error('Task not found');
-    err.status = 404;
-    throw err;
+    throw new Error('Task not found');
+  }
+  const task = store.tasks[taskIndex];
+  const allowedFields = ['title', 'description', 'status', 'priority'];
+  const hasRealChange = allowedFields.some(field => {
+    return (
+      data[field] !== task[field]
+    );
+  });
+  if (!hasRealChange) {
+    return task;
   }
 
-  const task = store.tasks[taskIndex];
-
-  if (data.title !== undefined) {
+  if (data.title.toLowerCase() !== task.title.toLowerCase()) {
     const normalizedTitle = data.title.toLowerCase();
     const isDuplicate = store.tasks.some(
-      (t) => t.id !== id && t.title.toLowerCase() === normalizedTitle
+      t => t.id !== id && t.title.toLowerCase() === normalizedTitle
     );
     if (isDuplicate) {
-      const err = new Error('Task with this title already exists');
-      err.status = 400;
-      throw err;
+      throw new Error('Task with this title already exists');
     }
   }
-
-  const allowedFields = ['title', 'description', 'status', 'priority'];
-  allowedFields.forEach((field) => {
+  allowedFields.forEach(field => {
     if (data[field] !== undefined) {
       task[field] = data[field];
     }
   });
-
   task.updatedAt = new Date();
-
   return task;
 };
+
 
 module.exports = { createTask, getAllTask, updateTask };
