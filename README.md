@@ -20,36 +20,6 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 
 ---
 
-## Tech Stack
-
-- Node.js
-- Express.js
-- JavaScript (CommonJS)
-- UUID for unique identifiers
-- In-memory data storage (No Database)
-
----
-## Features
-
-### 1. Create Task
-- Accepts task details via request body
-- Validates task input(title, description and priority)
-- Prevents duplicate task titles
-- Automatically generates UUID and timestamps
-
-### 2. List All Tasks
-- Returns all tasks
-- Supports filtering by:
-  - Status->[Pending, In Progress, Completed]
-  - Priority->[High, Medium, Low]
-
-### 3. Update Task
-- update or alter existing task - title, description
-- update Status->[Pending, In Progress, Completed]
-- update Priority->[High, Medium, Low]
-
----
-
 ## 📂 Project Structure
 
 ```txt
@@ -78,7 +48,7 @@ todo-application/
 │   │
 │   ├── validators/
 │   │   └── taskValidator.js
-|   |  └── task.schema.js
+|   |   └── task.schema.js
 │   └── app.js
 │   └── server.js
 │
@@ -88,6 +58,46 @@ todo-application/
 ├── package.json
 └── README.md
 ```
+---
+
+
+## Tech Stack
+
+- Node.js
+- Express.js
+- JavaScript (CommonJS)
+- UUID for unique identifiers
+- In-memory data storage (No Database)
+
+---
+## Features
+
+### 1. Create Task
+- Accepts task details via request body
+- Validates task input(title, description and priority)
+- Prevents duplicate task titles
+- Automatically generates UUID and timestamps
+
+### 2. List All Tasks
+- Returns all tasks
+- Supports filtering by:
+  - Status->[Pending, In Progress, Completed]
+  - Priority->[High, Medium, Low]
+
+### 3. Update Task
+- update or alter existing task - title, description
+- update Status->[Pending, In Progress, Completed]
+- update Priority->[High, Medium, Low]
+
+### **5. Delete a Single Task**
+Allows users to delete a task using its task ID.
+
+**Endpoint** : DELETE /v1/tasks/{id}  
+
+- Deletes the task with the specified ID from in-memory storage
+- Returns `200 status code` on successful deletion
+- Returns `404 status code` if no task exists with the given ID
+
 ---
 
 ## Installation & Setup
