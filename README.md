@@ -19,6 +19,14 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 - Delete Task: Remove a task and return an appropriate status code.
 
 ---
+## Tech Stack
+
+- Node.js
+- Express.js
+- ZOD (for validation)
+- JavaScript (CommonJS)
+- UUID for unique identifiers
+- In-memory data storage (No Database)
 
 ## 📂 Project Structure
 
@@ -60,14 +68,6 @@ todo-application/
 ```
 ---
 
-
-## Tech Stack
-
-- Node.js
-- Express.js
-- JavaScript (CommonJS)
-- UUID for unique identifiers
-- In-memory data storage (No Database)
 
 ---
 ## Features
