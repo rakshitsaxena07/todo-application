@@ -87,7 +87,7 @@ const getTaskById=(id)=>{
 const deleteTask=(id)=>{
   const numberOfTasks=store.tasks.length
   store.tasks=store.tasks.filter(task=>task.id!==id);
-  if(store.tasks.length==numberOfTasks){
+  if(store.tasks.length===numberOfTasks){
     throw new Error("Requested task to delete is not found")
   }
 }
