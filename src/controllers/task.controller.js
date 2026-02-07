@@ -50,4 +50,18 @@ const updateTask = async (req, res) => {
   }
 };
 
-module.exports = { createTask, getAllTask, updateTask };
+const getTaskById= async (req,res)=>{
+  try {
+    const task = await service.getTaskById(req.params.id);
+    return res.status(200).json(task);
+  } catch (error) {
+    return res.status(error.status || 404).json({
+      error: {
+        code: 'TASK_NOT_FOUND',
+        message: error.message,
+      },
+    });
+  }
+}
+
+module.exports = { createTask, getAllTask, updateTask, getTaskById };

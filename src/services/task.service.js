@@ -76,5 +76,12 @@ const updateTask = (id, data) => {
   return task;
 };
 
+const getTaskById=(id)=>{
+  const task = store.tasks.find(task=> task.id === id);
+  if(!task){
+    throw new Error(`Task with id: ${id} not found`)
+  }
+  return task;
+}
 
-module.exports = { createTask, getAllTask, updateTask };
+module.exports = { createTask, getAllTask, updateTask, getTaskById };
