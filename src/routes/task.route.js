@@ -8,4 +8,5 @@ const router = express.Router();
 router.post('/',validateMiddleware.validateCreateTask, taskController.createTask);
 router.get('/', taskController.getAllTask);
 router.patch('/:id',validateMiddleware.validateUpdateTask, taskController.updateTask);
+router.get('/:id',taskController.getTaskById)
 module.exports = router;
