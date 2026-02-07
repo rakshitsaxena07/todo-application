@@ -29,26 +29,31 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 - In-memory data storage (No Database)
 
 ---
-## Features
+### **1. Create Task**
+Allows users to create new tasks with validation
+- **Endpoint** : POST /v1/tasks 
 
-### 1. Create Task
-- Accepts task details via request body
-- Validates task input(title, description and priority)
-- Prevents duplicate task titles
-- Automatically generates UUID and timestamps
+- Validates title and description length using ZOD validation
+- Prevents saving a task if another task with the same title already exists
+- Prevents saving a task if another task with the same title already exists
 
-### 2. List All Tasks
-- Returns all tasks
-- Supports filtering by:
-  - Status->[Pending, In Progress, Completed]
-  - Priority->[High, Medium, Low]
+### **2. List Tasks**
+Allows users to get new tasks with or without filter
+- Returns all tasks when no filters are provided.
+- Supports filtering by task status and priority.
 
-### 3. Update Task
-- update or alter existing task - title, description
-- update Status->[Pending, In Progress, Completed]
-- update Priority->[High, Medium, Low]
+- **Endpoint** : GET /v1/tasks
 
----
+### **3. Update Task**
+Allows users to update their tasks partially (any combination of fields).
+- **Endpoint** : PATCH /v1/tasks/:id
+
+### **4. Get a single task**
+Allows users to get a single task using the task_id
+- **Endpoint** : GET /v1/tasks/{id} 
+- Return all the deatils of the task.
+- Returns a 404 Not Found status code if the task does not exist.
+
 
 ## 📂 Project Structure
 
