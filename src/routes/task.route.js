@@ -9,4 +9,5 @@ router.post('/',validateMiddleware.validateCreateTask, taskController.createTask
 router.get('/', taskController.getAllTask);
 router.patch('/:id',validateMiddleware.validateUpdateTask, taskController.updateTask);
 router.get('/:id',taskController.getTaskById)
+router.delete('/:id', taskController.deleteTask)
 module.exports = router;

@@ -84,4 +84,12 @@ const getTaskById=(id)=>{
   return task;
 }
 
-module.exports = { createTask, getAllTask, updateTask, getTaskById };
+const deleteTask=(id)=>{
+  const numberOfTasks=store.tasks.length
+  store.tasks=store.tasks.filter(task=>task.id!==id);
+  if(store.tasks.length===numberOfTasks){
+    throw new Error("Requested task to delete is not found")
+  }
+}
+
+module.exports = { createTask, getAllTask, updateTask, getTaskById, deleteTask };
