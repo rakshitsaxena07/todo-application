@@ -28,6 +28,8 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 - UUID for unique identifiers
 - In-memory data storage (No Database)
 
+---
+
 ## 📂 Project Structure
 
 ```txt
@@ -89,6 +91,13 @@ todo-application/
 - update Status->[Pending, In Progress, Completed]
 - update Priority->[High, Medium, Low]
 
+### **4. Get a single task**
+Allows users to get a single task using the task_id
+
+**Endpoint** : GET /v1/tasks/{id} 
+- Return all the deatils of the task.
+- Returns a 404 Not Found status code if the task does not exist.
+- 
 ### **5. Delete a Single Task**
 Allows users to delete a task using its task ID.
 

@@ -79,7 +79,7 @@ const updateTask = (id, data) => {
 const getTaskById=(id)=>{
   const task = store.tasks.find(task=> task.id === id);
   if(!task){
-    throw new Error("Task Not Found")
+    throw new Error(`Task with id: ${id} not found`)
   }
   return task;
 }
