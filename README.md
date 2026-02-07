@@ -62,26 +62,25 @@ todo-application/
 │   ├── constants/
 │   │   └── taskConstants.js
 │   │
-│   ├── controllers/tasks/
-│   │   ├── createTask.js
-│   │   ├── fetchTasks.js
-│   │   └── updateTask.js
+│   ├── controllers
+│   │   ├── task.controller.js
 │   │
 │   ├── data/
 │   │   └── store.js
+│   ├── models/
+│   │   └── task.model.js
 │   │
 │   ├── routes/
-│   │   └── task.js
+│   │   └── task.route.js
 │   │
-│   ├── services/tasks/
-│   │   ├── create.js
-│   │   ├── fetch.js
-│   │   └── update.js
+│   ├── services
+│   │   ├── task.service.js
 │   │
 │   ├── validators/
 │   │   └── taskValidator.js
-│   │
+|   |  └── task.schema.js
 │   └── app.js
+│   └── server.js
 │
 ├── .gitignore
 ├── index.js
@@ -115,7 +114,7 @@ npm install
 
 4. Start the server
 ```
-node index.js
+node src/server.js
 ```
 
 5. The server will start on:
@@ -125,22 +124,4 @@ http://localhost:3000
 
 ---
 
-## Testing the API
 
-#### You can test the API using:
-
-- Postman
-- Thunder Client
-- curl
-
-All responses are returned in JSON format with appropriate HTTP status codes.
-
----
-
-## Assumptions & Limitations
-
-No database is used (data resets on server restart)
-
-Authentication and authorization are out of scope
-
-Designed purely for architectural and OOP demonstration

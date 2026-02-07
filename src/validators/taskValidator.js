@@ -1,85 +1,50 @@
-const { PRIORITY, STATUS } = require("../constants/taskConstants");
+const { createTaskSchema, updateTaskSchema } = require('./task.schema')
 
-const validateCreateTask = (data) => {
-    const { title, description, status, priority } = data;
-    
-    if (!title || typeof title !== 'string' || title.trim().length === 0 || title.length > 100) {
-        const error = new Error("Invalid or missing title");
-        error.status = 400;
-        error.code = "INVALID_TITLE";
-        throw error;
-    }
+function validateCreateTask(req, res, next) {
+    if (req.body.status) req.body.status = req.body.status.toLowerCase();
+    if (req.body.priority) req.body.priority = req.body.priority.toLowerCase();
 
-    if (!description || typeof description !== 'string' || description.trim().length === 0 || description.length > 500) {
-        const error = new Error("Invalid or missing description");
-        error.status = 400;
-        error.code = "INVALID_DESCRIPTION";
-        throw error;
+    const result = createTaskSchema.safeParse(req.body);
+    if (!result.success) {
+        const error = result.error?.issues?.[0]?.message || "Invalid input";
+        return res.status(400).json({
+            error: {
+                code: "INVALID_TASK_DATA",
+                message: error
+            }
+        })
     }
-    
-    if (!status || !Object.values(STATUS).includes(status)) {
-        const error = new Error("Invalid or missing status");
-        error.status = 400;
-        error.code = "INVALID_STATUS";
-        throw error;
-    }
-    
-    if (!priority || !Object.values(PRIORITY).includes(priority)) {
-        const error = new Error("Invalid or missing priority");
-        error.status = 400;
-        error.code = "INVALID_PRIORITY";
-        throw error;
-    }
-};
+    req.body = result.data;
+    next();
+}
 
-const validateUpdateTask = (data) => {
-    const validFields = ['title', 'description', 'status', 'priority'];
-    const hasValidField = Object.keys(data).some(key => validFields.includes(key));
-    
-    if (!hasValidField) {
-        const error = new Error("No valid fields to update");
-        error.status = 400;
-        error.code = "NO_VALID_FIELDS";
-        throw error;
-    }
-
-    const { title, description, status, priority } = data;
-
-    if (title !== undefined) {
-        if (typeof title !== 'string' || title.trim().length === 0 || title.length > 100) {
-            const error = new Error("Invalid title");
-            error.status = 400;
-            error.code = "INVALID_TITLE";
-            throw error;
+function validateUpdateTask(req, res, next) {
+    const fieldsNotRequired = ['id', 'createdAt', 'updatedAt'];
+    for (const field of fieldsNotRequired) {
+        if (req.body[field] !== undefined) {
+            return res.status(400).json({
+                error: {
+                    code: 'INVALID_UPDATE_FIELDS',
+                    message: 'id, createdAt, and updatedAt cannot be updated',
+                },
+            });
         }
     }
+    if (req.body.status) req.body.status = req.body.status.toLowerCase();
+    if (req.body.priority) req.body.priority = req.body.priority.toLowerCase();
 
-    if (description !== undefined) {
-        if (typeof description !== 'string' || description.trim().length === 0 || description.length > 500) {
-            const error = new Error("Invalid description");
-            error.status = 400;
-            error.code = "INVALID_DESCRIPTION";
-            throw error;
-        }
+
+    const result = updateTaskSchema.safeParse(req.body);
+    if (!result.success) {
+        const error = result.error?.issues?.[0]?.message || "Invalid input";
+        return res.status(400).json({
+            error: {
+                code: 'INVALID_TASK_DATA',
+                message: error,
+            },
+        });
     }
-
-    if (status !== undefined) {
-        if (!Object.values(STATUS).includes(status)) {
-            const error = new Error("Invalid status");
-            error.status = 400;
-            error.code = "INVALID_STATUS";
-            throw error;
-        }
-    }
-
-    if (priority !== undefined) {
-        if (!Object.values(PRIORITY).includes(priority)) {
-            const error = new Error("Invalid priority");
-            error.status = 400;
-            error.code = "INVALID_PRIORITY";
-            throw error;
-        }
-    }
-};
-
-module.exports = { validateCreateTask, validateUpdateTask };
+    req.body = result.data;
+    next();
+}
+module.exports = { validateCreateTask, validateUpdateTask }
