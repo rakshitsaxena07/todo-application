@@ -6,7 +6,7 @@ function validateCreateTask(req, res, next) {
 
     const result = createTaskSchema.safeParse(req.body);
     if (!result.success) {
-        const error = result.error?.errors?.[0]?.message || "Invalid input";
+        const error = result.error?.issues?.[0]?.message || "Invalid input";
         return res.status(400).json({
             error: {
                 code: "INVALID_TASK_DATA",
@@ -36,7 +36,7 @@ function validateUpdateTask(req, res, next) {
 
     const result = updateTaskSchema.safeParse(req.body);
     if (!result.success) {
-        const error = result.error?.errors?.[0]?.message || "Invalid input";
+        const error = result.error?.issues?.[0]?.message || "Invalid input";
         return res.status(400).json({
             error: {
                 code: 'INVALID_TASK_DATA',
