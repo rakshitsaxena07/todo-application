@@ -43,7 +43,7 @@ const updateTask = async (req, res) => {
   } catch (error) {
     return res.status(error.status || 404).json({
       error: {
-        code: 'TASK_NOT_FOUND',
+        code: 'TASK_NOT_UPDATED',
         message: error.message,
       },
     });
