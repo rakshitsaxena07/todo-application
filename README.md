@@ -29,12 +29,22 @@ Design and implement a robust RESTful API for a Task Management System. The appl
 - In-memory data storage (No Database)
 
 ---
+## Feature
 ### **1. Create Task**
 Allows users to create new tasks with validation
 - **Endpoint** : POST /v1/tasks 
-
-- Validates title and description length using ZOD validation
+```json
+{
+  "title": "string (max 100)",
+  "description": "string (max 500)",
+  "status": "pending | in progress | completed",
+  "priority": "low | medium | high"
+}
+```
+- Validates title and description length using middleware
+- Tasks are created with a default status as pending and priority as low
 - Prevents saving a task if another task with the same title already exists
+- `createdAt` and `updatedAt` are set automatically during task creation
 - Prevents saving a task if another task with the same title already exists
 
 ### **2. List Tasks**
@@ -42,17 +52,34 @@ Allows users to get new tasks with or without filter
 - Returns all tasks when no filters are provided.
 - Supports filtering by task status and priority.
 
-- **Endpoint** : GET /v1/tasks
+**Endpoint**
+- GET /v1/tasks
+- GET /v1/tasks?status=pending
+- GET /v1/tasks?priority=high
+- GET /v1/tasks?status=pending&priority=medium
 
 ### **3. Update Task**
 Allows users to update their tasks partially (any combination of fields).
-- **Endpoint** : PATCH /v1/tasks/:id
-
+**Endpoint**
+- Endpoint: PATCH /v1/tasks/:id
+- Request body
+```json
+{
+  "title": "string (max 100)",
+  "description": "string (max 500)",
+  "status": "pending | in progress | completed",
+  "priority": "low | medium | high"
+}
+```
+- Validates updated fields if provided.
+- Updates updatedAt automatically.
 ### **4. Get a single task**
 Allows users to get a single task using the task_id
-- **Endpoint** : GET /v1/tasks/{id} 
+
+**Endpoint** : GET /v1/tasks/{id} 
 - Return all the deatils of the task.
 - Returns a 404 Not Found status code if the task does not exist.
+
 
 
 ## 📂 Project Structure
