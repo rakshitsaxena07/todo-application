@@ -6,8 +6,10 @@ const app = express();
 app.use(express.json());
 
 app.use('/v1/tasks', taskRoutes);
-app.use('/*', (req, res) => {
-    res.status(404).send('Not Found');
+app.use((req, res) => {
+  res.status(404).json({
+    error: 'Requested resource not found'
+  });
 });
 
 module.exports = app;
