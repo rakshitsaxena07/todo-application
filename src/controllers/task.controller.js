@@ -78,4 +78,18 @@ const deleteTask=async(req,res)=>{
   }
 }
 
-module.exports = { createTask, getAllTask, updateTask, getTaskById, deleteTask };
+const createBulkTasks = async (req, res) => {
+  try {
+    const tasks = await service.createBulkTasks(req.body);
+    return res.status(201).json(tasks);
+  } catch (error) {
+    return res.status(400).json({
+      error: {
+        code: 'INVALID_TASK_DATA',
+        message: error.message,
+      },
+    });
+  }
+};
+
+module.exports = { createTask, getAllTask, updateTask, getTaskById, deleteTask, createBulkTasks };

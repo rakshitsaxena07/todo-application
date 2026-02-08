@@ -107,6 +107,17 @@ Allows users to delete a task using its task ID.
 - Returns `200 status code` on successful deletion
 - Returns `404 status code` if no task exists with the given ID
 
+### **6. Bulk Task Creation**
+Allows users to create multiple tasks in a single request.
+
+**Endpoint** : POST /v1/tasks/bulk
+
+- Accepts an array of task objects in the request body
+- Validates each task before creation
+- Prevents duplicate task titles within the request
+- Prevents creation if any task title already exists
+- Returns a 201 Created status code with the list of created tasks on success
+- Returns a 400 Bad Request status code if validation fails or duplicate titles are found
 ---
 
 ## Installation & Setup

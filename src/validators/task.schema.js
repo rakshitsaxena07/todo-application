@@ -24,5 +24,6 @@ const updateTaskSchema = z.object({
   priority: prioritySchema.optional(),
 });
 
+const createBulkTaskSchema = z.array(createTaskSchema).min(1, "At least one task is required");
 
-module.exports={createTaskSchema,updateTaskSchema};
+module.exports={createTaskSchema,updateTaskSchema, createBulkTaskSchema};
