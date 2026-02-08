@@ -1,4 +1,4 @@
-const { createTaskSchema, updateTaskSchema } = require('./task.schema')
+const { createTaskSchema, updateTaskSchema, createBulkTaskSchema } = require('./task.schema')
 
 function validateCreateTask(req, res, next) {
     if (req.body.status) req.body.status = req.body.status.toLowerCase();
@@ -47,4 +47,36 @@ function validateUpdateTask(req, res, next) {
     req.body = result.data;
     next();
 }
-module.exports = { validateCreateTask, validateUpdateTask }
+
+function validateCreateBulkTasks(req, res, next) {
+    if (!Array.isArray(req.body)) {
+        return res.status(400).json({
+            error: {
+                code: "INVALID_TASK_DATA",
+                message: "Request body must be an array of tasks"
+            }
+        });
+    }
+
+    req.body = req.body.map(task => ({
+        ...task,
+        status: task.status?.toLowerCase(),
+        priority: task.priority?.toLowerCase()
+    }));
+
+    const result = createBulkTaskSchema.safeParse(req.body);
+
+    if (!result.success) {
+        return res.status(400).json({
+            error: {
+                code: "INVALID_TASK_DATA",
+                message: result.error.issues[0].message
+            }
+        });
+    }
+
+    req.body = result.data;
+    next();
+}
+
+module.exports = { validateCreateTask, validateUpdateTask, validateCreateBulkTasks }
