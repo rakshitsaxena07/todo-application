@@ -26,10 +26,24 @@ const findByTitle = (title) => {
   ) || null;
 };
 
+const updateById = (id, updates) => {
+  const index = store.tasks.findIndex(task => task.id === id);
+  if (index === -1) return null;
+
+  store.tasks[index] = {
+    ...store.tasks[index],
+    ...updates,
+    updatedAt: new Date()
+  };
+
+  return store.tasks[index];
+};
+
 
 module.exports = {
   create,
   findAll,
   findById,
   findByTitle,
+  updateById,
 };
