@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/rakshitsaxena07/todo-application#readme",
   "dependencies": {
+    "dotenv": "^17.2.4",
     "express": "^5.2.1",
+    "pg": "^8.18.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
