@@ -1,128 +1,95 @@
-const store = require('../data/store');
-const crypto = require('crypto');
-const Task = require('../models/task.model');
+const taskRepository = require('../repository/task.repository');
 
 const createTask = (data) => {
-  const { title, description, priority, status } = data;
+  const existingTask = taskRepository.findByTitle(data.title);
 
-  const isTaskExists = store.tasks.some(
-    (task) => task.title.toLowerCase() === title.toLowerCase()
-  );
-
-  if (isTaskExists) {
-    const err = new Error('Task with this title already exists');
-    err.status = 400;
-    throw err;
+  if (existingTask) {
+    throw new Error('Task with this title already exists');
   }
 
-  const task = new Task({
-    id: crypto.randomUUID(),
-    ...data
-  });
-
-  store.tasks.push(task);
-  return task;
+  return taskRepository.create(data);
 };
 
-const getAllTask = (query) => {
-  let allTasks = [...store.tasks];
+const getAllTasks = (query) => {
+  let tasks = taskRepository.findAll();
 
   if (query.status) {
-    allTasks = allTasks.filter(
-      (task) => task.status.toLowerCase() === query.status.toLowerCase()
+    tasks = tasks.filter(
+      task => task.status.toLowerCase() === query.status.toLowerCase()
     );
   }
 
   if (query.priority) {
-    allTasks = allTasks.filter(
-      (task) => task.priority.toLowerCase() === query.priority.toLowerCase()
+    tasks = tasks.filter(
+      task => task.priority.toLowerCase() === query.priority.toLowerCase()
     );
   }
 
-  return allTasks;
+  return tasks;
+};
+
+const getTaskById = (id) => {
+  const task = taskRepository.findById(id);
+
+  if (!task) {
+    throw new Error(`Task with id: ${id} not found`);
+  }
+
+  return task;
 };
 
 const updateTask = (id, data) => {
-  const taskIndex = store.tasks.findIndex(task => task.id === id);
-  if (taskIndex === -1) {
+  const task = taskRepository.findById(id);
+
+  if (!task) {
     throw new Error('Task not found');
   }
-  const task = store.tasks[taskIndex];
-  const allowedFields = ['title', 'description', 'status', 'priority'];
-  const hasRealChange = allowedFields.some(field => {
-    return (
-      data[field] !== task[field]
-    );
-  });
-  if (!hasRealChange) {
-    return task;
-  }
 
-  if (data.title.toLowerCase() !== task.title.toLowerCase()) {
-    const normalizedTitle = data.title.toLowerCase();
-    const isDuplicate = store.tasks.some(
-      t => t.id !== id && t.title.toLowerCase() === normalizedTitle
-    );
-    if (isDuplicate) {
+  if (
+    data.title &&
+    data.title.toLowerCase() !== task.title.toLowerCase()
+  ) {
+    const duplicate = taskRepository.findByTitle(data.title);
+    if (duplicate && duplicate.id !== id) {
       throw new Error('Task with this title already exists');
     }
   }
-  allowedFields.forEach(field => {
-    if (data[field] !== undefined) {
-      task[field] = data[field];
-    }
-  });
-  task.updatedAt = new Date();
-  return task;
+
+  return taskRepository.updateById(id, data);
 };
 
-const getTaskById=(id)=>{
-  const task = store.tasks.find(task=> task.id === id);
-  if(!task){
-    throw new Error(`Task with id: ${id} not found`)
-  }
-  return task;
-}
+const deleteTask = (id) => {
+  const deleted = taskRepository.deleteById(id);
 
-const deleteTask=(id)=>{
-  const numberOfTasks=store.tasks.length
-  store.tasks=store.tasks.filter(task=>task.id!==id);
-  if(store.tasks.length===numberOfTasks){
-    throw new Error("Requested task to delete is not found")
+  if (!deleted) {
+    throw new Error('Requested task to delete is not found');
   }
-}
+};
 
 const createBulkTasks = (tasksData) => {
-
   const titles = tasksData.map(t => t.title.toLowerCase());
 
-  const hasDuplicateInRequest = new Set(titles).size !== titles.length;
-
-  if (hasDuplicateInRequest) {
+  if (new Set(titles).size !== titles.length) {
     throw new Error('Duplicate titles found in request');
   }
-  for (const data of tasksData) {
-    const isTaskExists = store.tasks.some(
-      task => task.title.toLowerCase() === data.title.toLowerCase()
-    );
 
-    if (isTaskExists) {
+  for (const data of tasksData) {
+    const exists = taskRepository.findByTitle(data.title);
+    if (exists) {
       throw new Error(
         `Task with title '${data.title}' already exists`
       );
     }
   }
-  const createdTasks = [];
-  for (const data of tasksData) {
-    const task = new Task({
-      id: crypto.randomUUID(),
-      ...data
-    });
-    store.tasks.push(task);
-    createdTasks.push(task);
-  }
-  return createdTasks;
+
+  return taskRepository.createMany(tasksData);
 };
 
-
-module.exports = { createTask, getAllTask, updateTask, getTaskById, deleteTask, createBulkTasks };
+module.exports = {
+  createTask,
+  getAllTasks,
+  getTaskById,
+  updateTask,
+  deleteTask,
+  createBulkTasks
+};
