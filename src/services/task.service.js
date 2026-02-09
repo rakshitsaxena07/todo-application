@@ -71,8 +71,8 @@ const updateTask = (id, data) => {
   return task;
 };
 
-const getTaskById=(id)=>{
-  const task = repository.getTaskById(id);
+const getTaskById= async(id)=>{
+  const task = await repository.getTaskById(id);
   if(!task){
     throw new Error(`Task with id: ${id} not found`)
   }
