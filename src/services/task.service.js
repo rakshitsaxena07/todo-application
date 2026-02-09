@@ -92,4 +92,37 @@ const deleteTask=(id)=>{
   }
 }
 
-module.exports = { createTask, getAllTask, updateTask, getTaskById, deleteTask };
+const createBulkTasks = (tasksData) => {
+
+  const titles = tasksData.map(t => t.title.toLowerCase());
+
+  const hasDuplicateInRequest = new Set(titles).size !== titles.length;
+
+  if (hasDuplicateInRequest) {
+    throw new Error('Duplicate titles found in request');
+  }
+  for (const data of tasksData) {
+    const isTaskExists = store.tasks.some(
+      task => task.title.toLowerCase() === data.title.toLowerCase()
+    );
+
+    if (isTaskExists) {
+      throw new Error(
+        `Task with title '${data.title}' already exists`
+      );
+    }
+  }
+  const createdTasks = [];
+  for (const data of tasksData) {
+    const task = new Task({
+      id: crypto.randomUUID(),
+      ...data
+    });
+    store.tasks.push(task);
+    createdTasks.push(task);
+  }
+  return createdTasks;
+};
+
+
+module.exports = { createTask, getAllTask, updateTask, getTaskById, deleteTask, createBulkTasks };
