@@ -18,8 +18,14 @@ const getAllTasks=async()=>{
     const tasks = await pool.query("select * from tasks");
     return tasks.rows;
 }
+
+const getTaskById=async(id)=>{
+  const result = await pool.query(`select * from tasks where id=$1`,[id]);
+  return result.rows[0];
+}
 module.exports = {
   findByTitle,
   create,
-  getAllTasks
+  getAllTasks,
+  getTaskById
 };
