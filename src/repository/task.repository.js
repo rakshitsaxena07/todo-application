@@ -12,6 +12,24 @@ const create = (data) => {
   return task;
 };
 
+const findAll = () => {
+  return [...store.tasks];
+};
+
+const findById = (id) => {
+  return store.tasks.find(task => task.id === id) || null;
+};
+
+const findByTitle = (title) => {
+  return store.tasks.find(
+    task => task.title.toLowerCase() === title.toLowerCase()
+  ) || null;
+};
+
+
 module.exports = {
-  create
+  create,
+  findAll,
+  findById,
+  findByTitle,
 };
