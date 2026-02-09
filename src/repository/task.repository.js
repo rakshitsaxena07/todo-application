@@ -39,6 +39,15 @@ const updateById = (id, updates) => {
   return store.tasks[index];
 };
 
+const deleteById = (id) => {
+  const index = store.tasks.findIndex(task => task.id === id);
+  if (index === -1) return false;
+
+  store.tasks.splice(index, 1);
+  return true;
+};
+
+
 
 module.exports = {
   create,
@@ -46,4 +55,5 @@ module.exports = {
   findById,
   findByTitle,
   updateById,
+  deleteById
 };
