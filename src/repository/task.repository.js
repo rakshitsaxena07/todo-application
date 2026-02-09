@@ -47,7 +47,18 @@ const deleteById = (id) => {
   return true;
 };
 
+const createMany = (tasksData) => {
+  const tasks = tasksData.map(data => {
+    const task = new Task({
+      id: crypto.randomUUID(),
+      ...data
+    });
+    store.tasks.push(task);
+    return task;
+  });
 
+  return tasks;
+};
 
 module.exports = {
   create,
@@ -55,5 +66,6 @@ module.exports = {
   findById,
   findByTitle,
   updateById,
-  deleteById
+  deleteById,
+  createMany
 };
