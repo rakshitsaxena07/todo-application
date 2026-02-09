@@ -1,27 +1,22 @@
 const store = require('../data/store');
 const crypto = require('crypto');
 const Task = require('../models/task.model');
+const repository = require('../repository/task.repository')
+const createTask =async (data) => {
+  const { title } = data;
 
-const createTask = (data) => {
-  const { title, description, priority, status } = data;
+  const existingTask =await repository.findByTitle(title);
 
-  const isTaskExists = store.tasks.some(
-    (task) => task.title.toLowerCase() === title.toLowerCase()
-  );
-
-  if (isTaskExists) {
-    const err = new Error('Task with this title already exists');
-    err.status = 400;
-    throw err;
+  if (existingTask) {
+    throw new Error('Task with this title already exists');
   }
 
-  const task = new Task({
+  const task = {
     id: crypto.randomUUID(),
     ...data
-  });
+  };
 
-  store.tasks.push(task);
-  return task;
+  return await repository.create(task);
 };
 
 const getAllTask = (query) => {
