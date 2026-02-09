@@ -8,8 +8,8 @@ async function createTasksTable() {
         description TEXT NOT NULL,
         status VARCHAR(50),
         priority VARCHAR(50),
-        created_at TIMESTAMP DEFAULT NOW(),
-        updated_at TIMESTAMP
+        createdAt TIMESTAMP DEFAULT NOW(),
+        updatedAt TIMESTAMP
       );
     `);
         console.log("Tasks table created successfully");
