@@ -5,7 +5,7 @@ async function createTasksTable() {
       CREATE TABLE IF NOT EXISTS tasks (
         id UUID PRIMARY KEY,
         title VARCHAR(255) NOT NULL UNIQUE,
-        description TEXT,
+        description TEXT NOT NULL,
         status VARCHAR(50),
         priority VARCHAR(50),
         created_at TIMESTAMP DEFAULT NOW(),
