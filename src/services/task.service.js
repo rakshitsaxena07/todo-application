@@ -19,8 +19,8 @@ const createTask =async (data) => {
   return await repository.create(task);
 };
 
-const getAllTask = (query) => {
-  let allTasks = [...store.tasks];
+const getAllTask =async(query) => {
+  let allTasks = await repository.getAllTasks();
 
   if (query.status) {
     allTasks = allTasks.filter(
