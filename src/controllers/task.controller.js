@@ -19,7 +19,7 @@ const createTask = async (req, res) => {
 const getAllTask = async (req, res) => {
   try {
     const query = req.query;
-    const tasks = await service.getAllTask(query);
+    const tasks = await service.getAllTasks(query);
 
     return res.status(200).json(tasks);
   } catch (error) {
